@@ -2,34 +2,39 @@
 #include<stdarg.h>
 #include<unistd.h>
 
-void	eval_func(char *c, int i,va_list arg)
+void	eval_func(char *c, int i, int a)
 {
-	if (c[i] == 'd')
+	if (c[i] == 'c')
 	{
-		int a = va_arg(arg,int);
-		printf("%d", a);
+		write (1, &a, 1);
 	}
 	return ;
 }
 
 int	ft_printf(char *c, ...)
 {
-	int	i;
+	int		i;
+	int	k;
 
 	va_list arg;
+	va_start(arg, c);
 	i = -1;
 	while(c[++i])
 	{
-		if (c[i] == '%')
-			eval_func(c, i + 1,arg);
+		if (c[i] == '%' && (c[i +1] == 'c' || c[i +1] == 'd' || c[i +1] == 'i'))
+		{
+			k =  va_arg(arg, int);
+			eval_func(c, i + 1, k);
+			i++;
+		}
 		else
-			printf("%c", c[i]);
+			write (1, &c[i], 1);
 	}
 	return (0);
 }
 
 int main()
 {
-	int a = 3;
-	ft_printf("hello %d",a);
+	int a = 67;
+	ft_printf("hello %c",a);
 }
