@@ -36,23 +36,31 @@ void	ft_putstr(char *str)
 
 
 
-void	eval_func(char *c, int i, int a)
+void	eval_func(char *c, int i, ...)
 {
+	va_list arg;
+	va_start (arg, i);
+	char k;
+	int a;
+	char *str;
+
 	if (c[i] == 'c')
+	{
+		a = va_arg(arg, int);
 		write (1, &a, 1);
+	}
 	if (c[i] == 'd' || c[i] == 'i')
 	{
+		a = va_arg(arg, int);
 		putnbr(a);
 	}
+	va_end(arg);
 	return ;
 }
 
 int	ft_printf(char *c, ...)
 {
 	int		i;
-	int		k;
-	char 	*str;
-
 	va_list arg;
 	va_start(arg, c);
 	i = -1;
@@ -61,36 +69,22 @@ int	ft_printf(char *c, ...)
 		if (c[i] == '%')
 		{
 			if ((c[i + 1] == 'c' || c[i + 1] == 'd' || c[i + 1] == 'i'))
-			{
-				k =  va_arg(arg, int);
-				eval_func(c, i + 1, k);
-			}
+				eval_func(c, i + 1, va_arg(arg, int));
 			else if (c[i + 1] == 's')
-			{
-				str = va_arg(arg, char *);
-				ft_putstr(str);
-			}
+				eval_func(c, i + 1, va_arg(arg, char *));
 			else if (c[i + 1] == 'p')
-			{
-				k = (unsigned int) va_arg(arg, unsigned int);
-				printf("%u 		",k);
-        		printf("%#x  	",k);
-
-			}
-
-
+				eval_func(c, i + i, va_arg(arg, unsigned int));
 			i++;
 		}
 		else
 			write (1, &c[i], 1);
 	}
+	va_end(arg);
 	return (0);
 }
 
 int main()
 {
-	int a = 67;
-	char *str;
-	ft_printf("%p", &str);
-	printf("		%p", &str);
+	char a = 'c';
+	printf("%%",a);
 }

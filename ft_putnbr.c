@@ -1,3 +1,8 @@
+#include<stdio.h>
+#include<stdarg.h>
+#include<unistd.h>
+#include "ft_putstr.c"
+#include "ft_putchar.c"
 void	ft_putnbr(int a)
 {
 	if (a < 0)
