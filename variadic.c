@@ -41,7 +41,7 @@ void	eval_func(char *c, int i, ...)
 	va_list arg;
 	va_start (arg, i);
 	char k;
-	int a;
+	long a;
 	char *str;
 
 	if (c[i] == 'c')
@@ -72,7 +72,7 @@ int	ft_printf(char *c, ...)
 				eval_func(c, i + 1, va_arg(arg, int));
 			else if (c[i + 1] == 's')
 				eval_func(c, i + 1, va_arg(arg, char *));
-			else if (c[i + 1] == 'p')
+			else if (c[i + 1] == 'x' || c[i + 1] == 'X' )
 				eval_func(c, i + i, va_arg(arg, unsigned int));
 			i++;
 		}
