@@ -6,7 +6,7 @@
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:13 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 17:24:08 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:04:02 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	ft_printf(const char * c, ...)
 				ret += print_hex(c[i + 1], va_arg(arg, unsigned int));
 			else if (c[i + 1] == 'p')
 				ret += print_ptr(va_arg(arg, unsigned long));
+			else if (c[i + 1] == '%')
+				ret += ft_putchar('%');
 			i++;
 		}
 		else
