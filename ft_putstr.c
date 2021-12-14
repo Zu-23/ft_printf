@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/14 13:58:23 by zhaddoum          #+#    #+#             */
+/*   Updated: 2021/12/14 17:02:53 by zhaddoum         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include<stdio.h>
-#include<stdarg.h>
-#include<unistd.h>
-#include "ft_putnbr.c"
-#include "ft_putchar.c"
-void	ft_putstr(char *str)
+#include "ft_printf.h"
+
+int	ft_putstr(char *str)
 {
+	int	i;
+
+	i = 0;
 	while (*str != '\0')
 	{
-		ft_putchar(*str);
+		i += ft_putchar(*str);
 		str++;
 	}
+	return (i);
 }
