@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"libftprintf.h": "c",
-		"ft_printf.h": "c",
-		"ostream": "c",
-		"sstream": "c",
-		"unistd.h": "c"
-	}
-}

@@ -6,7 +6,7 @@
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:13 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 17:14:17 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:24:08 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	print_ptr(unsigned long a)
 {
 	int	i;
 
+	i = 0;
 	i += ft_putstr("0x");
 	i += hexconv(a, 'p');
 	return (i);
@@ -57,28 +58,33 @@ static int	print_ptr(unsigned long a)
 int	ft_printf(const char * c, ...)
 {
 	int		i;
+	int		ret;
 	va_list	arg;
 
 	va_start(arg, c);
 	i = -1;
+	ret = 0;
 	while (c[++i])
 	{
 		if (c[i] == '%')
 		{
 			if ((c[i + 1] == 'c' || c[i + 1] == 'd' || c[i + 1] == 'i'))
-				print_int_char(c[i + 1], va_arg(arg, int));
+				ret += print_int_char(c[i + 1], va_arg(arg, int));
 			else if (c[i + 1] == 's') {
-				print_str(va_arg(arg, char *));
+				ret += print_str(va_arg(arg, char *));
 			}
 			else if (c[i + 1] == 'x' || c[i + 1] == 'X' || c[i + 1] == 'u' )
-				print_hex(c[i + 1], va_arg(arg, unsigned int));
+				ret += print_hex(c[i + 1], va_arg(arg, unsigned int));
 			else if (c[i + 1] == 'p')
-				print_ptr(va_arg(arg, unsigned long));
+				ret += print_ptr(va_arg(arg, unsigned long));
 			i++;
 		}
 		else
+		{
 			write (1, &c[i], 1);
+			ret++;
+		}
 	}
 	va_end(arg);
-	return (0);
+	return (ret);
 }

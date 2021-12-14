@@ -6,7 +6,7 @@ ft_printf.c \
 
 OBJ = $(SRC:.c=.o)
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 CC = gcc -Wall -Wextra -Werror
 RM = rm -f
 AR = ar rcs
