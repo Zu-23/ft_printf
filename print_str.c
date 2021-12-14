@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 14:17:34 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:40:54 by zhaddoum         ###   ########.fr       */
+/*   Created: 2021/12/14 18:42:30 by zhaddoum          #+#    #+#             */
+/*   Updated: 2021/12/14 18:45:24 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-
-int		ft_putstr(char *str);
-int		ft_putnbr(long a);
-int		ft_putchar(char c);
-int		hexconv(long long i, char c);
-int		ft_printf(const char * c, ...);
-int		print_str(char *str);
-
-#endif
+int	print_str(char *str)
+{
+	if (!str)
+	{
+		return ft_putstr("(null)");
+	}
+	return (ft_putstr(str));
+}

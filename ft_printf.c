@@ -6,20 +6,11 @@
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:13 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:04:02 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:51:03 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	print_str(char *str)
-{
-	if (!str)
-	{
-		return ft_putstr("(null)");
-	}
-	return (ft_putstr(str));
-}
 
 static int	print_int_char(char c, int a)
 {
@@ -55,7 +46,25 @@ static int	print_ptr(unsigned long a)
 	return (i);
 }
 
-int	ft_printf(const char * c, ...)
+static int	eval(va_list arg, char c)
+{
+	int	ret;
+
+	ret = 0;
+	if ((c == 'c' || c == 'd' || c == 'i'))
+		ret += print_int_char(c, va_arg(arg, int));
+	else if (c == 's')
+		ret += print_str(va_arg(arg, char *));
+	else if (c == 'x' || c == 'X' || c == 'u' )
+		ret += print_hex(c, va_arg(arg, unsigned int));
+	else if (c == 'p')
+		ret += print_ptr(va_arg(arg, unsigned long));
+	else if (c == '%')
+		ret += ft_putchar('%');
+	return (ret);
+}
+
+int	ft_printf(const char *c, ...)
 {
 	int		i;
 	int		ret;
@@ -68,17 +77,7 @@ int	ft_printf(const char * c, ...)
 	{
 		if (c[i] == '%')
 		{
-			if ((c[i + 1] == 'c' || c[i + 1] == 'd' || c[i + 1] == 'i'))
-				ret += print_int_char(c[i + 1], va_arg(arg, int));
-			else if (c[i + 1] == 's') {
-				ret += print_str(va_arg(arg, char *));
-			}
-			else if (c[i + 1] == 'x' || c[i + 1] == 'X' || c[i + 1] == 'u' )
-				ret += print_hex(c[i + 1], va_arg(arg, unsigned int));
-			else if (c[i + 1] == 'p')
-				ret += print_ptr(va_arg(arg, unsigned long));
-			else if (c[i + 1] == '%')
-				ret += ft_putchar('%');
+			ret += eval(arg, c[i + 1]);
 			i++;
 		}
 		else
