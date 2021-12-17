@@ -16,12 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-
 int		ft_putstr(char *str);
-int		ft_putnbr(long a);
+int		ft_putnbr(long a, int i);
 int		ft_putchar(char c);
-int		hexconv(long long i, char c);
+int		ft_hexconv(unsigned long int i, char c);
 int		ft_printf(const char * c, ...);
-int		print_str(char *str);
+int		ft_print_str(char *str);
 
 #endif

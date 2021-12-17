@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   hexconv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 13:58:32 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:40:06 by zhaddoum         ###   ########.fr       */
+/*   Created: 2021/12/14 13:58:49 by zhaddoum          #+#    #+#             */
+/*   Updated: 2021/12/14 16:58:41 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(long a, int i)
+int	ft_hexconv(unsigned long int i, char c)
 {
-	static int c;
+	char		*base;
+	static int	a;
 
-	c = i;
-	if (a < 0)
+	a = 0;
+	if (c == 'x' || c == 'p')
+		base = "0123456789abcdef";
+	else if (c == 'X')
+		base = "0123456789ABCDEF";
+	if (i < 16)
 	{
-		a *= -1;
-		write (1, "-", 1);
-		c++;
+		write(1, &base[i], 1);
+		a += 1;
+		return (a);
 	}
-	if (a > 9)
+	else
 	{
-		ft_putnbr(a / 10, c);
-		ft_putnbr(a % 10, c);
+		ft_hexconv(i / 16, c);
+		write(1, &base[i % 16], 1);
+		a += 1;
 	}
-	if (a <= 9)
-	{
-		a += '0';
-		write (1, &a, 1);
-		c++;
-	}
-	return (c);
+
+	return (a);
 }

@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 13:58:32 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:40:06 by zhaddoum         ###   ########.fr       */
+/*   Created: 2021/12/14 18:42:30 by zhaddoum          #+#    #+#             */
+/*   Updated: 2021/12/14 18:45:24 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(long a, int i)
+int	ft_print_str(char *str)
 {
-	static int c;
-
-	c = i;
-	if (a < 0)
+	if (!str)
 	{
-		a *= -1;
-		write (1, "-", 1);
-		c++;
+		return ft_putstr("(null)");
 	}
-	if (a > 9)
-	{
-		ft_putnbr(a / 10, c);
-		ft_putnbr(a % 10, c);
-	}
-	if (a <= 9)
-	{
-		a += '0';
-		write (1, &a, 1);
-		c++;
-	}
-	return (c);
+	return (ft_putstr(str));
 }

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	print_int_char(char c, int a)
+static int	ft_print_int_char(char c, int a)
 {
 	int	i;
 
@@ -24,25 +24,30 @@ static int	print_int_char(char c, int a)
 		i++;
 	}
 	else
-		i += ft_putnbr(a);
+		i += ft_putnbr(a, 0);
 	return (i);
 }
 
-static int	print_hex(char c, unsigned int a)
+static int	ft_print_hex(char c, unsigned int a)
 {
 	if (c == 'x' || c == 'X')
-		return (hexconv(a, c));
+		return (ft_hexconv(a, c));
 	else
-		return (ft_putnbr(a));
+		return (ft_putnbr(a, 0));
 }
 
-static int	print_ptr(unsigned long a)
+static int	ft_print_ptr(unsigned long int a)
 {
 	int	i;
 
 	i = 0;
+	if (!a)
+	{
+		i += ft_putstr("(nil)");
+		return (i);
+	}
 	i += ft_putstr("0x");
-	i += hexconv(a, 'p');
+	i += ft_hexconv(a, 'p');
 	return (i);
 }
 
@@ -51,14 +56,15 @@ static int	eval(va_list arg, char c)
 	int	ret;
 
 	ret = 0;
+	
 	if ((c == 'c' || c == 'd' || c == 'i'))
-		ret += print_int_char(c, va_arg(arg, int));
+		ret += ft_print_int_char(c, va_arg(arg, int));
 	else if (c == 's')
-		ret += print_str(va_arg(arg, char *));
+		ret += ft_print_str(va_arg(arg, char *));
 	else if (c == 'x' || c == 'X' || c == 'u' )
-		ret += print_hex(c, va_arg(arg, unsigned int));
+		ret += ft_print_hex(c, va_arg(arg, unsigned int));
 	else if (c == 'p')
-		ret += print_ptr(va_arg(arg, unsigned long));
+		ret += ft_print_ptr(va_arg(arg, unsigned long long));
 	else if (c == '%')
 		ret += ft_putchar('%');
 	return (ret);

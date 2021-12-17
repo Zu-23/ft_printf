@@ -1,9 +1,10 @@
+
 SRC=ft_putnbr.c\
-hexconv.c\
+ft_hexconv.c\
 ft_putstr.c \
 ft_putchar.c \
 ft_printf.c \
-print_str.c \
+ft_print_str.c \
 
 OBJ = $(SRC:.c=.o)
 
