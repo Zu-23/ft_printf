@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hexconv.c                                          :+:      :+:    :+:   */
+/*   ft_hexconv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:49 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 16:58:41 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/24 13:43:10 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_hexconv(unsigned long int i, char c)
+int	ft_hexconv(unsigned long long i, char c)
 {
 	char		*base;
 	static int	a;
@@ -34,6 +34,5 @@ int	ft_hexconv(unsigned long int i, char c)
 		write(1, &base[i % 16], 1);
 		a += 1;
 	}
-
 	return (a);
 }

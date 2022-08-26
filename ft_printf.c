@@ -6,7 +6,7 @@
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:13 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:51:03 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/24 13:44:12 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,11 @@ static int	ft_print_hex(char c, unsigned int a)
 		return (ft_putnbr(a, 0));
 }
 
-static int	ft_print_ptr(unsigned long int a)
+static int	ft_print_ptr(unsigned long long a)
 {
 	int	i;
 
 	i = 0;
-	if (!a)
-	{
-		i += ft_putstr("(nil)");
-		return (i);
-	}
 	i += ft_putstr("0x");
 	i += ft_hexconv(a, 'p');
 	return (i);
@@ -56,13 +51,12 @@ static int	eval(va_list arg, char c)
 	int	ret;
 
 	ret = 0;
-	
 	if ((c == 'c' || c == 'd' || c == 'i'))
 		ret += ft_print_int_char(c, va_arg(arg, int));
 	else if (c == 's')
 		ret += ft_print_str(va_arg(arg, char *));
 	else if (c == 'x' || c == 'X' || c == 'u' )
-		ret += ft_print_hex(c, va_arg(arg, unsigned int));
+		ret += ft_print_hex(c, va_arg(arg, unsigned long));
 	else if (c == 'p')
 		ret += ft_print_ptr(va_arg(arg, unsigned long long));
 	else if (c == '%')

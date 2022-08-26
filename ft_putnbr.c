@@ -6,7 +6,7 @@
 /*   By: zhaddoum <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:58:32 by zhaddoum          #+#    #+#             */
-/*   Updated: 2021/12/14 18:40:06 by zhaddoum         ###   ########.fr       */
+/*   Updated: 2021/12/24 13:45:18 by zhaddoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putnbr(long a, int i)
 {
-	static int c;
+	static int	c;
 
 	c = i;
 	if (a < 0)
